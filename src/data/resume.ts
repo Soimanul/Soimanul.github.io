@@ -1,8 +1,8 @@
 export const skills = {
-  languages: ['Python', 'Java', 'C', 'MySQL', 'Bash'],
+  languages: ['Python', 'Java', 'C', 'SQL', 'Bash'],
   toolsTech: ['Docker', 'Git', 'Linux', 'macOS', 'Windows'],
-  concepts: ['Algorithms', 'Data Structures', 'Networking', 'Machine Learning'],
-  interests: ['Software Engineering', 'Cybersecurity', 'Game Design'],
+  concepts: ['Algorithms', 'Data Structures', 'Networking', 'Machine Learning', 'Systems thinking'],
+  interests: ['Machine Learning', 'Software Engineering', 'Cybersecurity'],
 }
 
 export const experience = [
@@ -14,7 +14,7 @@ export const experience = [
     period: 'Nov 2025 – Dec 2025',
     highlight: '2nd Place',
     bullets: [
-      'Won second place in the 7th edition against 40+ teams.',
+      'Won second place in the 7th edition datathon against 40+ teams (Masters/Bachelors).',
       'Performed data analysis on IATA datasets and developed a business solution for aviation sustainability.',
     ],
   },

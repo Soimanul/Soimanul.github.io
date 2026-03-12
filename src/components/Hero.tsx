@@ -25,7 +25,21 @@ export default function Hero() {
 
       {/* Gradient overlays */}
       <div className="absolute inset-0 bg-gradient-to-b from-bg/30 via-bg/50 to-bg" />
-      <div className="absolute inset-0 bg-gradient-to-t from-bg via-transparent to-transparent" />
+      <div className="absolute inset-0 bg-gradient-to-t from-bg via-bg/60 to-transparent" />
+
+      {/* Graduated blur fade at bottom */}
+      <div
+        className="absolute bottom-0 left-0 right-0 pointer-events-none"
+        style={{ height: '200px', backdropFilter: 'blur(4px)', WebkitBackdropFilter: 'blur(4px)', maskImage: 'linear-gradient(to top, black 0%, transparent 100%)', WebkitMaskImage: 'linear-gradient(to top, black 0%, transparent 100%)' }}
+      />
+      <div
+        className="absolute bottom-0 left-0 right-0 pointer-events-none"
+        style={{ height: '140px', backdropFilter: 'blur(10px)', WebkitBackdropFilter: 'blur(10px)', maskImage: 'linear-gradient(to top, black 30%, transparent 100%)', WebkitMaskImage: 'linear-gradient(to top, black 30%, transparent 100%)' }}
+      />
+      <div
+        className="absolute bottom-0 left-0 right-0 pointer-events-none"
+        style={{ height: '80px', backdropFilter: 'blur(20px)', WebkitBackdropFilter: 'blur(20px)', maskImage: 'linear-gradient(to top, black 50%, transparent 100%)', WebkitMaskImage: 'linear-gradient(to top, black 50%, transparent 100%)' }}
+      />
 
       {/* Grain texture */}
       <div
@@ -44,7 +58,7 @@ export default function Hero() {
         animate="show"
         className="relative z-10 text-center px-6 max-w-4xl mx-auto"
       >
-        <motion.p variants={stagger.item} className="section-label mb-6">
+        <motion.p variants={stagger.item} className="section-label mb-6" style={{ color: '#111' }}>
           Computer Science &amp; Artificial Intelligence
         </motion.p>
 

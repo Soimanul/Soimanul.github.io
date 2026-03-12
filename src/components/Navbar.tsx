@@ -50,7 +50,12 @@ export default function Navbar() {
       <nav className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
         {/* Logo */}
         <a href="#" className="group flex items-center gap-2">
-          <span className="font-display text-xl font-bold text-text">VS</span>
+          <span
+            className="font-display text-xl font-bold transition-colors duration-500"
+            style={{ color: scrolled ? 'var(--text)' : '#111' }}
+          >
+            VS
+          </span>
           <span className="w-1.5 h-1.5 rounded-full bg-accent group-hover:scale-150 transition-transform duration-300" />
         </a>
 
@@ -60,11 +65,15 @@ export default function Navbar() {
             <li key={href}>
               <a
                 href={href}
-                className={`font-heading text-sm font-500 tracking-wide transition-colors duration-200 relative py-1 ${
-                  active === href.slice(1)
-                    ? 'text-accent'
-                    : 'text-text-muted hover:text-text'
-                }`}
+                className="font-heading text-sm font-500 tracking-wide transition-colors duration-500 relative py-1"
+                style={{
+                  color:
+                    active === href.slice(1)
+                      ? 'var(--accent)'
+                      : scrolled
+                      ? 'var(--text-muted)'
+                      : '#111',
+                }}
               >
                 {label}
                 {active === href.slice(1) && (
@@ -78,11 +87,14 @@ export default function Navbar() {
           ))}
         </ul>
 
-        {/* Download CV */}
+        {/* Download CV — always green, dark bg on hover when scrolled */}
         <a
           href="/VLAD_SOIMU_CV.pdf"
           download
-          className="hidden md:flex items-center gap-2 px-4 py-2 border border-accent text-accent font-heading text-sm font-600 rounded-sm hover:bg-accent hover:text-bg transition-all duration-200"
+          className="hidden md:flex items-center gap-2 px-4 py-2 border border-accent font-heading text-sm font-600 rounded-sm transition-all duration-300 group/cv"
+          style={{ backgroundColor: 'rgba(122, 171, 122, 0.25)', color: 'var(--accent)' }}
+          onMouseEnter={e => (e.currentTarget.style.backgroundColor = 'var(--accent)', e.currentTarget.style.color = 'var(--bg)')}
+          onMouseLeave={e => (e.currentTarget.style.backgroundColor = 'rgba(122, 171, 122, 0.25)', e.currentTarget.style.color = 'var(--accent)')}
         >
           Download CV
         </a>
@@ -93,9 +105,18 @@ export default function Navbar() {
           onClick={() => setMenuOpen((v) => !v)}
           aria-label="Toggle menu"
         >
-          <span className={`block w-5 h-px bg-text transition-all duration-300 ${menuOpen ? 'rotate-45 translate-y-2' : ''}`} />
-          <span className={`block w-5 h-px bg-text transition-all duration-300 ${menuOpen ? 'opacity-0' : ''}`} />
-          <span className={`block w-5 h-px bg-text transition-all duration-300 ${menuOpen ? '-rotate-45 -translate-y-2' : ''}`} />
+          <span
+            className={`block w-5 h-px transition-all duration-300 ${menuOpen ? 'rotate-45 translate-y-2' : ''}`}
+            style={{ backgroundColor: scrolled ? 'var(--text)' : '#111' }}
+          />
+          <span
+            className={`block w-5 h-px transition-all duration-300 ${menuOpen ? 'opacity-0' : ''}`}
+            style={{ backgroundColor: scrolled ? 'var(--text)' : '#111' }}
+          />
+          <span
+            className={`block w-5 h-px transition-all duration-300 ${menuOpen ? '-rotate-45 -translate-y-2' : ''}`}
+            style={{ backgroundColor: scrolled ? 'var(--text)' : '#111' }}
+          />
         </button>
       </nav>
 
