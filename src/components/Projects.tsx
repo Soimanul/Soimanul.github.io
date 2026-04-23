@@ -101,30 +101,44 @@ export default function Projects() {
                   />
                 </div>
 
-                <p className="font-body text-text-muted text-sm leading-relaxed flex-1 mb-5 line-clamp-3">
-                  {repo.description || 'No description provided.'}
+                <p className="font-body text-text-muted text-sm leading-relaxed flex-1 mb-4 line-clamp-3 break-words">
+                  {repo._resolvedDescription || repo.description || 'No description provided.'}
                 </p>
 
-                <div className="flex items-center gap-4 text-xs text-text-muted font-body">
-                  {repo.language && (
-                    <span className="flex items-center gap-1.5">
-                      <span
-                        className="w-2.5 h-2.5 rounded-full shrink-0"
-                        style={{ backgroundColor: langColors[repo.language] ?? '#888' }}
-                      />
-                      {repo.language}
-                    </span>
-                  )}
-                  {repo.stargazers_count > 0 && (
-                    <span className="flex items-center gap-1">
-                      <FiStar size={11} />
-                      {repo.stargazers_count}
-                    </span>
-                  )}
-                  {repo.forks_count > 0 && (
-                    <span className="flex items-center gap-1">
-                      <FiGitBranch size={11} />
-                      {repo.forks_count}
+                <div className="flex items-center justify-between gap-2 flex-wrap">
+                  <div className="flex items-center gap-4 text-xs text-text-muted font-body">
+                    {repo.language && (
+                      <span className="flex items-center gap-1.5">
+                        <span
+                          className="w-2.5 h-2.5 rounded-full shrink-0"
+                          style={{ backgroundColor: langColors[repo.language] ?? '#888' }}
+                        />
+                        {repo.language}
+                      </span>
+                    )}
+                    {repo.stargazers_count > 0 && (
+                      <span className="flex items-center gap-1">
+                        <FiStar size={11} />
+                        {repo.stargazers_count}
+                      </span>
+                    )}
+                    {repo.forks_count > 0 && (
+                      <span className="flex items-center gap-1">
+                        <FiGitBranch size={11} />
+                        {repo.forks_count}
+                      </span>
+                    )}
+                  </div>
+
+                  {repo._source && (
+                    <span
+                      className={`text-[10px] font-heading px-2 py-0.5 rounded-full border shrink-0 ${
+                        repo._source === 'organization'
+                          ? 'border-accent/40 text-accent/80'
+                          : 'border-border text-text-muted'
+                      }`}
+                    >
+                      {repo._source === 'organization' ? 'Seraphim Systems' : 'Personal'}
                     </span>
                   )}
                 </div>

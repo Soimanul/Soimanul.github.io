@@ -12,4 +12,8 @@ export interface GitHubRepo {
   updated_at: string
   fork: boolean
   private: boolean
+  // Enriched fields added by useGitHubRepos hook
+  _source?: 'personal' | 'organization'
+  _resolvedDescription?: string
+  _score?: number
 }
