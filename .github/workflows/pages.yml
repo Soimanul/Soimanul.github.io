@@ -2,7 +2,9 @@ name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: [main, dev]
+    branches:
+      - main
+      - dev  # dev builds run for validation only; deployment is gated to main
   pull_request:
     branches: [main]
   workflow_dispatch:
@@ -45,7 +47,7 @@ jobs:
 
   deploy:
     needs: build
-    if: github.ref == 'refs/heads/main'
+    if: github.ref == 'refs/heads/main' || github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
     environment:
       name: github-pages
