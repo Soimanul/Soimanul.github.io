@@ -45,23 +45,30 @@ export default function About() {
               className="space-y-5 text-text-muted leading-relaxed font-body"
             >
               <p>
-                I'm a Computer Science &amp; AI student at{' '}
+                Analytical and detail-oriented Computer Science and Artificial Intelligence
+                student at{' '}
                 <span className="text-text font-medium">IE University</span> in Madrid,
-                with a background spanning data engineering, policy research, and energy
-                infrastructure.
+                with a strong focus on software engineering, data analysis, and machine
+                learning.
               </p>
               <p>
-                What drives me is building things that matter — combining rigorous
-                technical foundations with real-world problem solving. Whether it's
-                analysing datasets for IATA or writing Python simulations, I bring the
-                same precision and curiosity to everything.
+                My work centers on building reliable, scalable systems and extracting
+                meaningful insights from data. I have experience working with real-world
+                datasets, developing Python-based solutions, and applying structured
+                problem-solving to technical challenges.
               </p>
               <p>
-                Currently looking for internships in{' '}
+                I am particularly interested in designing efficient backend systems,
+                implementing data-driven applications, and exploring machine learning
+                models that translate theory into practical impact.
+              </p>
+              <p>
+                Currently seeking internship opportunities in{' '}
                 <span className="text-text font-medium">
-                  Software Engineering, Machine Learning
+                  Software Engineering, Data Analysis, or Machine Learning
                 </span>
-                , or <span className="text-text font-medium">Cybersecurity</span>.
+                , where I can contribute to production-level systems and continue
+                developing as an engineer.
               </p>
             </motion.div>
           </div>
