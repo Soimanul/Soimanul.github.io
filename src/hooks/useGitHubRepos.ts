@@ -110,12 +110,15 @@ export function useGitHubRepos() {
           return hasDesc || hasTopics
         }
 
+        const isPinned = (r: GitHubRepo) =>
+          PINNED_REPOS.some((name) => name.toLowerCase() === r.name.toLowerCase())
+
         const personal = personalData
-          .filter((r) => !r.fork && !r.name.endsWith('.github.io') && isQualityRepo(r))
+          .filter((r) => !r.fork && !r.name.endsWith('.github.io') && (isPinned(r) || isQualityRepo(r)))
           .map((r) => ({ ...r, _source: 'personal' as const }))
 
         const org = orgData
-          .filter((r) => !r.fork && isQualityRepo(r))
+          .filter((r) => !r.fork && (isPinned(r) || isQualityRepo(r)))
           .map((r) => ({ ...r, _source: 'organization' as const }))
 
         // Merge and deduplicate by id (personal takes priority)
