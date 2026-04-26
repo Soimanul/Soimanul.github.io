@@ -43,18 +43,32 @@ export default function Projects() {
             What I've built.
           </motion.h2>
 
-          <motion.a
-            initial={{ opacity: 0 }}
-            animate={inView ? { opacity: 1 } : {}}
-            transition={{ duration: 0.6, delay: 0.3 }}
-            href="https://github.com/Soimanul"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-2 font-heading text-sm text-text-muted hover:text-accent transition-colors"
-          >
-            <FiGithub size={16} />
-            View all on GitHub
-          </motion.a>
+          <div className="flex items-center gap-4 flex-wrap">
+            <motion.a
+              initial={{ opacity: 0 }}
+              animate={inView ? { opacity: 1 } : {}}
+              transition={{ duration: 0.6, delay: 0.3 }}
+              href="https://github.com/Soimanul"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 font-heading text-sm text-text-muted hover:text-accent transition-colors"
+            >
+              <FiGithub size={16} />
+              Personal
+            </motion.a>
+            <motion.a
+              initial={{ opacity: 0 }}
+              animate={inView ? { opacity: 1 } : {}}
+              transition={{ duration: 0.6, delay: 0.4 }}
+              href="https://github.com/Seraphim-Systems"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 font-heading text-sm text-text-muted hover:text-accent transition-colors"
+            >
+              <FiGithub size={16} />
+              Seraphim Systems
+            </motion.a>
+          </div>
         </div>
 
         {loading && (

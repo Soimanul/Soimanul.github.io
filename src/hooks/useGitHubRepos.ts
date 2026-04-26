@@ -11,6 +11,7 @@ const SCORING_MIN_DESC_LENGTH = 20
 const SCORE_DESC_BONUS = 2
 const TRUNCATE_MAX_LENGTH = 160
 const TRUNCATE_EARLY_BOUNDARY_RATIO = 0.3
+const MAX_DISPLAY_REPOS = 9
 
 /** Remove common markdown syntax and HTML tags to produce plain text. */
 function stripMarkdown(text: string): string {
@@ -92,12 +93,19 @@ export function useGitHubRepos() {
         const personalData: GitHubRepo[] = personalRes.ok ? await personalRes.json() : []
         const orgData: GitHubRepo[] = orgRes.ok ? await orgRes.json() : []
 
+        /** Returns true for repos that have enough content to be worth showing. */
+        function isQualityRepo(r: GitHubRepo): boolean {
+          const hasDesc = !!(r.description && r.description.trim().length > MIN_DESCRIPTION_LENGTH)
+          const hasTopics = !!(r.topics && r.topics.length > 0)
+          return hasDesc || hasTopics
+        }
+
         const personal = personalData
-          .filter((r) => !r.fork && !r.name.endsWith('.github.io'))
+          .filter((r) => !r.fork && !r.name.endsWith('.github.io') && isQualityRepo(r))
           .map((r) => ({ ...r, _source: 'personal' as const }))
 
         const org = orgData
-          .filter((r) => !r.fork)
+          .filter((r) => !r.fork && isQualityRepo(r))
           .map((r) => ({ ...r, _source: 'organization' as const }))
 
         // Merge and deduplicate by id (personal takes priority)
@@ -110,7 +118,7 @@ export function useGitHubRepos() {
           }
         }
 
-        // Enrich with resolved descriptions and scores, then sort
+        // Enrich with resolved descriptions and scores, then sort and cap
         const enriched = merged
           .map((repo) => ({
             ...repo,
@@ -118,6 +126,7 @@ export function useGitHubRepos() {
             _score: computeScore(repo),
           }))
           .sort((a, b) => (b._score ?? 0) - (a._score ?? 0))
+          .slice(0, MAX_DISPLAY_REPOS)
 
         setRepos(enriched)
       } catch (err) {
