@@ -13,6 +13,16 @@ const TRUNCATE_MAX_LENGTH = 160
 const TRUNCATE_EARLY_BOUNDARY_RATIO = 0.3
 const MAX_DISPLAY_REPOS = 9
 
+const PINNED_REPOS = [
+  'Synapse',
+  'git-query',
+  'nlp-article_analyzer',
+  'tamagotchme',
+  'n_body_simulation',
+  'mountain-pendulum',
+  'flux',
+]
+
 /** Remove common markdown syntax and HTML tags to produce plain text. */
 function stripMarkdown(text: string): string {
   return text
@@ -118,17 +128,25 @@ export function useGitHubRepos() {
           }
         }
 
-        // Enrich with resolved descriptions and scores, then sort and cap
-        const enriched = merged
-          .map((repo) => ({
-            ...repo,
-            _resolvedDescription: resolveDescription(repo),
-            _score: computeScore(repo),
-          }))
-          .sort((a, b) => (b._score ?? 0) - (a._score ?? 0))
-          .slice(0, MAX_DISPLAY_REPOS)
+        // Enrich with resolved descriptions and scores
+        const enriched = merged.map((repo) => ({
+          ...repo,
+          _resolvedDescription: resolveDescription(repo),
+          _score: computeScore(repo),
+        }))
 
-        setRepos(enriched)
+        const pinned = PINNED_REPOS
+          .map((name) => enriched.find((r) => r.name.toLowerCase() === name.toLowerCase()))
+          .filter((r): r is NonNullable<typeof r> => r != null)
+
+        const pinnedIds = new Set(pinned.map((r) => r.id))
+        const rest = enriched
+          .filter((r) => !pinnedIds.has(r.id))
+          .sort((a, b) => (b._score ?? 0) - (a._score ?? 0))
+
+        const result = [...pinned, ...rest].slice(0, MAX_DISPLAY_REPOS)
+
+        setRepos(result)
       } catch (err) {
         setError(err instanceof Error ? err.message : 'Failed to load repos')
       } finally {
