@@ -36,6 +36,9 @@ export default function Navbar() {
     return () => observer.disconnect();
   }, []);
 
+  const cvBg = scrolled ? "rgba(122, 171, 122, 0.15)" : "rgba(122, 171, 122, 0.55)";
+  const cvColor = scrolled ? "var(--accent-light)" : "#111";
+
   return (
     <motion.header
       initial={{ y: -80, opacity: 0 }}
@@ -65,14 +68,17 @@ export default function Navbar() {
             <li key={href}>
               <a
                 href={href}
-                className="font-heading text-sm font-500 tracking-wide transition-colors duration-500 relative py-1"
+                className="font-heading text-sm font-semibold tracking-wide transition-colors duration-500 relative py-1"
                 style={{
                   color:
                     active === href.slice(1)
                       ? "var(--accent)"
                       : scrolled
-                        ? "var(--text-muted)"
+                        ? "rgba(240, 237, 232, 0.85)"
                         : "#111",
+                  textShadow: scrolled
+                    ? "none"
+                    : "0 0 12px rgba(255, 255, 255, 0.7)",
                 }}
               >
                 {label}
@@ -87,23 +93,19 @@ export default function Navbar() {
           ))}
         </ul>
 
-        {/* Download CV — always green, dark bg on hover when scrolled */}
+        {/* Download CV — always green, solid accent on hover */}
         <a
           href="/VLAD_SOIMU_CV.pdf"
           download
-          className="hidden md:flex items-center gap-2 px-4 py-2 border border-accent font-heading text-sm font-600 rounded-sm transition-all duration-300 group/cv"
-          style={{
-            backgroundColor: "rgba(122, 171, 122, 0.5)",
-            color: "var(--accent)",
-          }}
+          className="hidden md:flex items-center gap-2 px-4 py-2 border border-accent font-heading text-sm font-semibold rounded-sm backdrop-blur-sm transition-all duration-300 group/cv"
+          style={{ backgroundColor: cvBg, color: cvColor }}
           onMouseEnter={(e) => (
             (e.currentTarget.style.backgroundColor = "var(--accent)"),
             (e.currentTarget.style.color = "var(--bg)")
           )}
           onMouseLeave={(e) => (
-            (e.currentTarget.style.backgroundColor =
-              "rgba(122, 171, 122, 0.5)"),
-            (e.currentTarget.style.color = "var(--accent)")
+            (e.currentTarget.style.backgroundColor = cvBg),
+            (e.currentTarget.style.color = cvColor)
           )}
         >
           Download CV
