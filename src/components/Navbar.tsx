@@ -57,7 +57,7 @@ export default function Navbar() {
             className="font-display text-xl font-bold transition-colors duration-500"
             style={{ color: scrolled ? "var(--text)" : "#111" }}
           >
-            VS
+            cuci
           </span>
           <span className="w-1.5 h-1.5 rounded-full bg-accent group-hover:scale-150 transition-transform duration-300" />
         </a>
